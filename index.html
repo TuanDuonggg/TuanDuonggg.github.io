@@ -1,0 +1,51 @@
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Video & Canvas Demo</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding-top: 50px;
+      font-family: sans-serif;
+    }
+
+    video, canvas {
+      border: 2px solid #555;
+      width: 480px;
+      height: 270px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video Element -->
+  <video id="myVideo" controls>
+    <source src="tan gai 101.mp4" type="video/mp4">
+    Trình duyệt của bạn không hỗ trợ video.
+  </video>
+
+  <!-- Canvas Element -->
+  <canvas id="myCanvas" width="270" height="480"></canvas>
+
+  <script>
+    const video = document.getElementById('myVideo');
+    const canvas = document.getElementById('myCanvas');
+    const context = canvas.getContext('2d');
+
+    function updateCanvas() {
+      if (!video.paused && !video.ended) {
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        requestAnimationFrame(updateCanvas);
+      }
+    }
+
+    video.addEventListener('play', () => {
+      updateCanvas();
+    });
+  </script>
+
+</body>
+</html>
